@@ -2,6 +2,7 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
     <title>Myblog</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 
@@ -25,27 +26,30 @@
     </nav>
 </header>
 
-<section>
+<main>
     <div class="container" style="width: 60%; padding-bottom: 30px;">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#"><a href="/posts">Posts</a></a></li>
             </ol>
         </nav>
 
-        <div class="card" style="margin-top: 20px;" th:each="posts: ${posts}">
-            <div class="card-body">
-                <p class="card-text">
-                    <span th:text="${posts.author}"></span>
-                    <span th:text="${posts.date}"></span>
-                </p>
-                <h5 class="card-title"><span th:text="${posts.title}"></span></h5>
-                <p class="card-text"><span th:utext="${#strings.abbreviate(posts.text,400)}"></span></p>
-                <a th:href="${(#mvc.url('MC#getPostDetails').arg(0, posts.id)).build()}" class="btn btn-primary">Detalhes do post</a>
-            </div>
-        </div>
+        <article>
+            <h1 class="card-title" style="font-weight: bold; margin-bottom: 20px;"><span th:text="${posts.title}"></span></h1>
+            <p class="card-subtitle mb-2 text-muted">
+                <i class="material-icons">person_outline</i>
+                <span th:text="${posts.author}"></span>
+                <br>
+                <i class="material-icons">date_range</i>
+                <span th:text="${posts.date}"></span>
+            </p>
+            <section>
+                <p class="card-text" style="margin-top: 40px;"><span th:utext="${posts.text}"></span></p>
+            </section>
+        </article>
+        </article>
     </div>
-</section>
+</main>
 
 </body>
 </html>
